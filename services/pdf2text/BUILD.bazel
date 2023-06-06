@@ -1,0 +1,32 @@
+load("@rules_python//python:defs.bzl", "py_binary")
+load("@io_bazel_rules_docker//python3:image.bzl", "py3_image")
+
+SRCS = [
+    "main.py",
+    "pdf2text_pb2.py",
+    "pdf2text_pb2_grpc.py",
+]
+
+LIBS = [
+    "@pypi_grpcio//:pkg",
+    "@pypi_protobuf//:pkg",
+    "@pypi_pypdf2//:pkg",
+]
+
+py_binary(
+    name = "pdf2text",
+    srcs = SRCS,
+    main = "main.py",
+    deps = LIBS,
+)
+
+py3_image(
+    name = "pdf2text_image",
+    srcs = SRCS,
+    main = "main.py",
+    deps = [
+        "@pip_deps_linux_x86_64_grpcio//:pkg",
+        "@pip_deps_linux_x86_64_protobuf//:pkg",
+        "@pip_deps_linux_x86_64_pypdf2//:pkg",
+    ],
+)

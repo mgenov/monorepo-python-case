@@ -1,0 +1,4 @@
+PyPDF2==3.0.1
+grpcio==1.54.2
+protobuf==4.23.2
+google_api==0.1.12
